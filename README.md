@@ -1,4 +1,5 @@
 # cha-ci
 使用前务必联网
-目前不可查询单字，请期待之后版本。
+目前已经支持查询单字。
+更新请到https://github.com/Cheng07-python/cha-ci.git下载新版本的软件
 如果程序出现任何问题，请联系：cheng070225@sina.com
