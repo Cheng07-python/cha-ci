@@ -168,14 +168,33 @@ while z == 1:
                 wlsy1 = wlsy1.replace('/', '')
                 wlsy1 = wlsy1.replace('"', '')
                 wlsy1 = wlsy1.replace('=', '')
+                wlsy1 = wlsy1.replace('&','')
+                wlsy1 = wlsy1.replace('%','')
+                html2 = html2.replace('"', '')
+                html2 = html2.replace('=', '')
+                html2 = html2.replace('&','')
+                html2 = html2.replace('%','')
+                html2 = html2.replace('<','')
+                html2 = html2.replace('>', '')
+                html2 = html2.replace('/', '')
+                html2 = html2.replace('_', '')
+                html2 = html2.replace('-', '')
+                html2 = html2.replace('国语辞典','')
+                html2 = html2.replace('.', '')
+                html2 = html2.replace('      ', '  ')
                 zm = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'l', 'n', 'o', 'p', 'q', 'r', 's',
                       't', 'u', 'v', 'w', 'x', 'y', 'z']
                 sz = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+                piny = ['ā','á','ǎ','à','ō','ó','ǒ','ò','ē','ē','é','ě','è','ī','í','ǐ','ì','ū','ú','ǔ','ù','ǖ','ǘ','ǚ','ǜ']
                 for j in range(10):
                     wlsy1 = wlsy1.replace(sz[j], '')
+                    html2 = html2.replace(sz[j],'')
                 for i in range(26):
                     wlsy1 = wlsy1.replace(zm[i], '')
-
+                    html2 = html2.replace(zm[i],'')
+                for h in range(24):
+                    wlsy1 = wlsy1.replace(piny[h],'')
+                    html2 = html2.replace(piny[h], '')
                 end = html2.find('</p></div><div class="h_line1">-----------------</div>')
                 zkh1 = html2.find('[')
                 zkh2 = html2.find(']')
@@ -210,7 +229,9 @@ while z == 1:
         wlsyII = wlsyII.replace('</h3>','')
         wlsyII = wlsyII.replace('<li>','')
         wlsyII = wlsyII.replace('</li>','')
-
+        zhuyin1 = html.find('<p><span class="z_ts2">拼音</span> <span class="dicpy">')
+        zhuyin2 = html.find('</span> <span class="z_d song"><span class="ptr"><a class="audio_play_button i_volume-up ptr cd_au" title="'+ci+'"></a></span></span></p> <p>')
+        zhuyinI = html[zhuyin1+53:zhuyin2]
         zifu = '<h3>' + ci + '</h3><p>【解释】'
         where = html.find(zifu)
         d = html.find('</p><p>【')
@@ -222,7 +243,9 @@ while z == 1:
         else:
 
             html1 = html[a:d]
+            print('注音：', zhuyinI)
             print(html1)
+
             print('网络释义：' + wlsyII)
             print('++++++++++===========================================++++++++++')
     continue
