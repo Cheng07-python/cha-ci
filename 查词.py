@@ -8,8 +8,8 @@ import sys
 from ping3 import ping
 
 #用户提示
-
-z = 1
+#程序里面变量比较多，请小心
+z = 1 #死循环，不然程序运行一遍就会退出
 print('使用时请保持联网！！！')
 print('若想使用最新版本软件，请前往网址：https://github.com/Cheng07-python/cha-ci.git'+'，并且点击“Code“按钮下载ZIP压缩包。')
 
@@ -22,7 +22,7 @@ print("IP address: %s" % ip_address)
 
 
 
-def ping_host(ip):
+def ping_host(ip):#这个可加可不加，反正对查词没有什么帮助。
     """
     获取节点的延迟的作用
     :param node:
@@ -77,16 +77,19 @@ while z == 1:
             zy = html1[:zyjs]
             syks = html1.find("<p><strong>基本字义</strong></p>")
             syzfc = '"</span>）</strong></p><p><span class="dicpy">"'
+            #找到相应数据
             sy = html1.find(
                 '<span class="ptr"><a class="audio_play_button i_volume-up ptr" data-src-mp3="//img.zdic.net/audio/zd/py/')
             syI = html1[sy + 104:]
             sy1 = syI.find("</span></p><ol> <li>")
             syII = syI[sy1 + 20:]
+
             syjs = syII.find('其它字义')
             syII = syII[:syjs]
             syjs = syII.find('其它字义')
             bihua = html.find('<p><span class="z_ts3">总笔画</span> ')
             bihuashu = html[bihua + 34:bihua + 36]
+            #查找替换
             syII = syII.replace('（<span class="dicpy">','')
             syII = syII.replace('</span>）','')
             syII = syII.replace('</span>', '')
@@ -181,15 +184,24 @@ while z == 1:
                 html2 = html2.replace('-', '')
                 html2 = html2.replace('国语辞典','')
                 html2 = html2.replace('.', '')
+                html2 = html2.replace(';', ' ')
+                html2 = html2.replace('∶', '')
+                html2 = html2.replace('.', '')
+                html2 = html2.replace('(', '')
+                html2 = html2.replace(')', '')
+                html2 = html2.replace('[', '')
+                html2 = html2.replace(']', '')
                 html2 = html2.replace('      ', '  ')
+                #懒得用循环了。下面就是循环的示例（筛选字母和数字以及拼音）。
                 zm = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'l', 'n', 'o', 'p', 'q', 'r', 's',
-                      't', 'u', 'v', 'w', 'x', 'y', 'z']
+                      't', 'u', 'v', 'w', 'x', 'y', 'z','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+                      'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
                 sz = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
                 piny = ['ā','á','ǎ','à','ō','ó','ǒ','ò','ē','ē','é','ě','è','ī','í','ǐ','ì','ū','ú','ǔ','ù','ǖ','ǘ','ǚ','ǜ']
                 for j in range(10):
                     wlsy1 = wlsy1.replace(sz[j], '')
                     html2 = html2.replace(sz[j],'')
-                for i in range(26):
+                for i in range(52):
                     wlsy1 = wlsy1.replace(zm[i], '')
                     html2 = html2.replace(zm[i],'')
                 for h in range(24):
@@ -248,4 +260,4 @@ while z == 1:
 
             print('网络释义：' + wlsyII)
             print('++++++++++===========================================++++++++++')
-    continue
+    continue#我也不知道这个continue有啥用反正运行不会出错
